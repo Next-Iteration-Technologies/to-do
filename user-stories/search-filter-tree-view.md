@@ -129,41 +129,6 @@ The following are explicitly **NOT** included in this story:
 
 ---
 
-## Technical Notes
-
-### Frontend Implementation
-
-**Components Affected:**
-- `app.component.ts` / `app.component.html` - Main search orchestration
-- `node-tree.component.ts` - Tree rendering with filtering logic
-- `node-item.component.ts` - Individual node display with highlighting
-- `search-results.component.ts` - **TO BE REMOVED** or hidden during filtered tree mode
-- `search.service.ts` - Enhanced to provide filtered node IDs and ancestor/descendant resolution
-   
-### Testing Considerations
-
-**Unit Tests Required:**
-- SearchService: `computeVisibleNodes()` with various tree structures
-- SearchService: Ancestor resolution for multi-level hierarchies
-- SearchService: Descendant resolution for nodes with many children
-- Highlighting logic: Case-insensitive matching, special characters, multiple occurrences
----
-
-## Dependencies
-
-**Internal Dependencies:**
-- None - this is a standalone feature enhancement to existing search functionality
-
-**External Dependencies:**
-- None - uses existing Angular and RxJS capabilities
-
-**Assumptions:**
-- All nodes are loaded in memory (current behavior via `StateService.getAllNodes()`)
-- Search operates on client-side data, not server-side filtering
-- Current node data structure remains unchanged (id, content, parentId, tags, notes)
-
----
-
 ## Non-Functional Requirements (NFRs)
 
 The following NFRs are relevant to this story. Please confirm which should be included as acceptance criteria vs. tracked separately:
