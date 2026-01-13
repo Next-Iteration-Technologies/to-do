@@ -30,11 +30,11 @@
       <!-- Completion checkbox -->
       <button 
         class="completion-checkbox" 
-        [class.completed]="isCompleted"
+        [class.completed]="shouldShowCompleted"
         (click)="toggleCompletion()"
         *ngIf="editContent.trim()"
       >
-        <span class="checkmark" *ngIf="isCompleted">✓</span>
+        <span class="checkmark" *ngIf="shouldShowCompleted">✓</span>
       </button>
 
       <div class="content-wrapper">
@@ -47,7 +47,7 @@
           (keydown)="onKeyDown($event)"
           class="node-input"
           [class.editing]="isEditing"
-          [class.completed]="isCompleted"
+          [class.completed]="shouldShowCompleted"
           placeholder="Add an item..."
         />
         

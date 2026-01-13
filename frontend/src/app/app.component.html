@@ -29,6 +29,7 @@
           Search
         </button>
         
+                
         <!-- Sync Status Indicator -->
         <div class="sync-status" *ngIf="pendingCount > 0">
           <span class="sync-indicator" [class.syncing]="syncStatus === 'syncing'" [class.error]="syncStatus === 'error'">
@@ -124,88 +125,87 @@
   />
 
   <!-- Keyboard Shortcuts Help -->
-  <div class="shortcuts-help" *ngIf="showShortcuts">
+  <div class="shortcuts-help">
     <div class="shortcuts-content">
       <h3>Keyboard Shortcuts</h3>
       <div class="shortcuts-grid">
         <div class="shortcut-item">
-          <kbd>Enter</kbd>
-          <span>Create new item</span>
+          <kbd>Shift + Enter</kbd>
+          <span>Create new child</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Tab</kbd>
-          <span>Indent item</span>
+          <kbd>Alt + ↑</kbd>
+          <span>Go to parent</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Shift + Tab</kbd>
-          <span>Outdent item</span>
+          <kbd>Alt + ↓</kbd>
+          <span>Go to first child</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Delete</kbd>
-          <span>Delete empty item</span>
+          <kbd>Home</kbd>
+          <span>Jump to first sibling</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Ctrl + Z</kbd>
-          <span>Undo</span>
+          <kbd>End</kbd>
+          <span>Jump to last sibling</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Ctrl + Y</kbd>
+          <kbd>Ctrl/Cmd + ↑/↓</kbd>
+          <span>Move item up/down</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Ctrl/Cmd + U</kbd>
+          <span>Underline text</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Space</kbd>
+          <span>Toggle complete (at start)</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Ctrl/Cmd + /</kbd>
+          <span>Toggle completion</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Ctrl/Cmd + D</kbd>
+          <span>Duplicate node</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Ctrl/Cmd + Y</kbd>
           <span>Redo</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Ctrl + F</kbd>
-          <span>Search</span>
+          <kbd>Ctrl/Cmd + Shift + F</kbd>
+          <span>Advanced search</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Ctrl + C</kbd>
-          <span>Copy</span>
-        </div>
-        <div class="shortcut-item">
-          <kbd>Ctrl + X</kbd>
-          <span>Cut</span>
-        </div>
-        <div class="shortcut-item">
-          <kbd>Ctrl + V</kbd>
-          <span>Paste</span>
-        </div>
-        <div class="shortcut-item">
-          <kbd>Ctrl + A</kbd>
+          <kbd>Ctrl/Cmd + A</kbd>
           <span>Select all</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Ctrl + B</kbd>
-          <span>Bold text</span>
-        </div>
-        <div class="shortcut-item">
-          <kbd>Ctrl + I</kbd>
-          <span>Italic text</span>
-        </div>
-        <div class="shortcut-item">
-          <kbd>Ctrl + Shift + 9</kbd>
+          <kbd>Ctrl/Cmd + Shift + 9</kbd>
           <span>Toggle notes</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Ctrl + Shift + 8</kbd>
+          <kbd>Ctrl/Cmd + Shift + 8</kbd>
           <span>Toggle star</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Ctrl + =</kbd>
+          <kbd>Ctrl/Cmd + Shift + S</kbd>
+          <span>Sort children</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Ctrl/Cmd + =</kbd>
           <span>Increase font size</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Ctrl + -</kbd>
+          <kbd>Ctrl/Cmd + -</kbd>
           <span>Decrease font size</span>
         </div>
         <div class="shortcut-item">
-          <kbd>Escape</kbd>
-          <span>Exit zoom/panels</span>
-        </div>
-        <div class="shortcut-item">
-          <kbd>Ctrl + ?</kbd>
+          <kbd>Ctrl/Cmd + ?</kbd>
           <span>Show shortcuts</span>
         </div>
       </div>
-      <button class="btn btn-secondary" (click)="showShortcuts = false">Close</button>
     </div>
   </div>
 </div>

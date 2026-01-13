@@ -46,6 +46,10 @@ export class NodeItemComponent implements OnInit, OnDestroy {
     private formattingService: FormattingService
   ) {}
 
+  get shouldShowCompleted(): boolean {
+    return this.isCompleted;
+  }
+
   ngOnInit(): void {
     this.editContent = this.node.content;
     this.isEditing = true; // Make inputs editable by default

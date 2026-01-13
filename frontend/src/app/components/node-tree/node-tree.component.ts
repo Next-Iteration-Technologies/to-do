@@ -442,6 +442,9 @@ export class NodeTreeComponent implements OnInit, OnDestroy {
       this.stateService.updateNode(nodeToUpdate);
     });
 
+    // Check and update parent completion status
+    this.updateParentCompletionStatus(node.id);
+
     // Update in backend
     this.nodeService.updateNode(node.id, updated).subscribe({
       next: (backendNode) => {
@@ -466,6 +469,29 @@ export class NodeTreeComponent implements OnInit, OnDestroy {
       result.push(c, ...this.collectDescendants(c.id));
     });
     return result;
+  }
+
+  private updateParentCompletionStatus(nodeId: number): void {
+    // Find the current node
+    const currentNode = this.allNodes.find(n => n.id === nodeId);
+    if (!currentNode || currentNode.parentId === null) return;
+
+    // Find the parent node
+    const parentNode = this.allNodes.find(n => n.id === currentNode.parentId);
+    if (!parentNode) return;
+
+    // Get all siblings of the current node (children of the parent)
+    const siblings = this.allNodes.filter(n => n.parentId === parentNode.id);
+    
+    // Check if all siblings are completed
+    const allSiblingsCompleted = siblings.length > 0 && siblings.every(sibling => sibling.isCompleted);
+    
+    // Update parent completion status
+    const updatedParent = { ...parentNode, isCompleted: allSiblingsCompleted };
+    this.stateService.updateNode(updatedParent);
+    
+    // Recursively update parent's parent
+    this.updateParentCompletionStatus(parentNode.id);
   }
 
   onDragStart(node: Node): void {

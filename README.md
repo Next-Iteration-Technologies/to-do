@@ -7,18 +7,30 @@ A powerful hierarchical to-do application with unlimited depth and keyboard-driv
 - **Hierarchical Task Structure**: Unlimited depth tree structure for organizing your tasks
 - **Keyboard-Driven Interface**: Fast navigation and editing using keyboard shortcuts
 - **Material Design UI**: Modern, clean interface using Angular Material
-- **Undo Functionality**: Undo the last action with Ctrl+Z
+- **Undo Functionality**: Undo the last action with Ctrl/Cmd+Z
 - **In-Memory Database**: Using H2 database for simplicity
 
 ## Keyboard Shortcuts
 
-- **Enter**: Create a new sibling node below current
-- **Tab**: Indent node (make it a child of previous sibling)
-- **Shift+Tab**: Outdent node (move to parent's level)
-- **Delete/Backspace**: Delete current node (when empty)
-- **Arrow Up/Down**: Navigate between nodes
-- **Ctrl+Up/Down**: Move node up/down in list
-- **Ctrl+Z**: Undo last action
+- **Shift+Enter**: Create a new child node
+- **Alt+Up**: Navigate to parent node
+- **Alt+Down**: Navigate to first child node
+- **Home**: Jump to first sibling
+- **End**: Jump to last sibling
+- **Ctrl/Cmd+Up/Down**: Move node up/down in list
+- **Ctrl/Cmd+U**: Underline text
+- **Space** (at start): Toggle completion
+- **Ctrl/Cmd+/**: Toggle completion
+- **Ctrl/Cmd+D**: Duplicate node
+- **Ctrl/Cmd+Y** or **Ctrl/Cmd+Shift+Z**: Redo last action
+- **Ctrl/Cmd+Shift+F**: Advanced search
+- **Ctrl/Cmd+A**: Select all nodes
+- **Ctrl/Cmd+Shift+9**: Toggle notes panel
+- **Ctrl/Cmd+Shift+8**: Toggle star on selected node
+- **Ctrl/Cmd+Shift+S**: Sort children alphabetically
+- **Ctrl/Cmd+=**: Increase font size
+- **Ctrl/Cmd+-**: Decrease font size
+- **Ctrl/Cmd+?**: Show this shortcuts panel
 
 ## Tech Stack
 
