@@ -16,6 +16,7 @@
       (toggleExpanded)="onToggleExpanded(treeNode.node)"
       (toggleCompleted)="onToggleCompleted(treeNode.node, $event)"
       (zoomIn)="onZoomIn(treeNode.node)"
+      (openAttachments)="onOpenAttachments(treeNode.node)"
       (dragStart)="onDragStart(treeNode.node)"
       (dragEnd)="onDragEnd()"
       (dragOver)="onDragOver($event)"
@@ -26,6 +27,7 @@
       *ngIf="treeNode.children && treeNode.children.length > 0 && treeNode.node.isExpanded !== false"
       [parentId]="treeNode.node.id"
       [depth]="depth + 1"
+      (openAttachments)="openAttachments.emit($event)"
     />
   </div>
 </div>

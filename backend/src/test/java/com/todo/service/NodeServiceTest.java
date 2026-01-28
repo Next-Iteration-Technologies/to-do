@@ -1,6 +1,7 @@
 package com.todo.service;
 
 import com.todo.entity.Node;
+import com.todo.repository.AttachmentRepository;
 import com.todo.repository.NodeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,12 @@ class NodeServiceTest {
 
     @Mock
     private NodeRepository nodeRepository;
+
+    @Mock
+    private AttachmentRepository attachmentRepository;
+
+    @Mock
+    private FileStorageService fileStorageService;
 
     @InjectMocks
     private NodeService nodeService;
