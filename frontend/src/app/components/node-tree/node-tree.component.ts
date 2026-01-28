@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Node } from '../../models/node.model';
 import { NodeItemComponent } from '../node-item/node-item.component';
@@ -22,6 +22,7 @@ interface TreeNode {
 export class NodeTreeComponent implements OnInit, OnDestroy {
   @Input() parentId: number | null = null;
   @Input() depth: number = 0;
+  @Output() openAttachments = new EventEmitter<Node>();
   
   nodes: TreeNode[] = [];
   private allNodes: Node[] = [];
@@ -416,6 +417,10 @@ export class NodeTreeComponent implements OnInit, OnDestroy {
 
   onZoomIn(node: Node): void {
     this.zoomService.zoomIn(node);
+  }
+
+  onOpenAttachments(node: Node): void {
+    this.openAttachments.emit(node);
   }
 
   onToggleExpanded(node: Node): void {

@@ -32,6 +32,7 @@ export class NodeItemComponent implements OnInit, OnDestroy {
   @Output() dragEnd = new EventEmitter<void>();
   @Output() dragOver = new EventEmitter<{node: Node, event: DragEvent}>();
   @Output() drop = new EventEmitter<{node: Node, event: DragEvent}>();
+  @Output() openAttachments = new EventEmitter<void>();
 
   @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
 
@@ -171,6 +172,11 @@ export class NodeItemComponent implements OnInit, OnDestroy {
     else if ((event.ctrlKey || event.metaKey) && event.key === '/') {
       event.preventDefault();
       this.toggleCompletion();
+    }
+    // Ctrl/Cmd + Shift + A - open attachments panel
+    else if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'A') {
+      event.preventDefault();
+      this.openAttachments.emit();
     }
     // Space - toggle completion (if at beginning of line)
     else if (event.key === ' ' && this.inputElement.nativeElement.selectionStart === 0) {

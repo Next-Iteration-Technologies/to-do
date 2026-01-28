@@ -61,6 +61,16 @@
           </span>
         </div>
       </div>
+
+      <!-- Attachment indicator -->
+      <button 
+        *ngIf="node.attachmentCount && node.attachmentCount > 0"
+        class="attachment-indicator"
+        (click)="openAttachments.emit(); $event.stopPropagation()"
+        title="View attachments (Ctrl+Shift+A)"
+      >
+        📎 {{ node.attachmentCount }}
+      </button>
     </div>
   </div>
 </div>

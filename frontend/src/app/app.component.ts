@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NodeTreeComponent } from './components/node-tree/node-tree.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { NodeNotesComponent } from './components/node-notes/node-notes.component';
+import { NodeAttachmentsComponent } from './components/node-attachments/node-attachments.component';
 import { StateService } from './services/state.service';
 import { NodeService } from './services/node.service';
 import { SearchService } from './services/search.service';
@@ -21,7 +22,7 @@ import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, NodeTreeComponent, SearchResultsComponent, NodeNotesComponent],
+  imports: [CommonModule, FormsModule, NodeTreeComponent, SearchResultsComponent, NodeNotesComponent, NodeAttachmentsComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -37,6 +38,8 @@ export class AppComponent implements OnInit {
   showExportMenu = false;
   showNotes = false;
   notesNode: Node | null = null;
+  showAttachments = false;
+  attachmentsNode: Node | null = null;
   syncStatus: 'idle' | 'syncing' | 'error' = 'idle';
   pendingCount = 0;
 
@@ -378,7 +381,10 @@ export class AppComponent implements OnInit {
   }
 
   handleEscape(): void {
-    if (this.showNotes) {
+    if (this.showAttachments) {
+      this.showAttachments = false;
+      this.attachmentsNode = null;
+    } else if (this.showNotes) {
       this.showNotes = false;
       this.notesNode = null;
     } else if (this.isZoomed) {
@@ -511,6 +517,23 @@ export class AppComponent implements OnInit {
     this.notesNode = null;
   }
 
+  openAttachments(node: Node): void {
+    this.attachmentsNode = node;
+    this.showAttachments = true;
+  }
+
+  onAttachmentsClose(): void {
+    this.showAttachments = false;
+    this.attachmentsNode = null;
+  }
+
+  onAttachmentCountChanged(nodeId: number, count: number): void {
+    const node = this.stateService.getNode(nodeId);
+    if (node) {
+      const updatedNode = { ...node, attachmentCount: count };
+      this.stateService.updateNode(updatedNode);
+    }
+  }
 
   // Export/Import Methods
   exportToJSON(): void {

@@ -1,10 +1,12 @@
 package com.todo.service;
 
 import com.todo.entity.Node;
+import com.todo.repository.AttachmentRepository;
 import com.todo.repository.NodeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +14,15 @@ import java.util.List;
 public class NodeService {
     
     private final NodeRepository nodeRepository;
+    private final AttachmentRepository attachmentRepository;
+    private final FileStorageService fileStorageService;
     
-    public NodeService(NodeRepository nodeRepository) {
+    public NodeService(NodeRepository nodeRepository,
+                       AttachmentRepository attachmentRepository,
+                       FileStorageService fileStorageService) {
         this.nodeRepository = nodeRepository;
+        this.attachmentRepository = attachmentRepository;
+        this.fileStorageService = fileStorageService;
     }
     
     public List<Node> getAllRootNodes() {
@@ -59,13 +67,24 @@ public class NodeService {
     public void deleteNode(Long id) {
         Node node = getNodeById(id);
         
-        // Recursively delete all children
         List<Node> children = nodeRepository.findByParentIdOrderByPositionAsc(id);
         for (Node child : children) {
             deleteNode(child.getId());
         }
         
+        deleteNodeAttachments(id);
         nodeRepository.delete(node);
+    }
+    
+    private void deleteNodeAttachments(Long nodeId) {
+        attachmentRepository.findByNodeIdOrderByCreatedAtAsc(nodeId).forEach(attachment -> {
+            try {
+                fileStorageService.deleteFile(attachment.getStoredFilename());
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to delete attachment file: " + attachment.getStoredFilename(), e);
+            }
+        });
+        attachmentRepository.deleteByNodeId(nodeId);
     }
     
     @Transactional

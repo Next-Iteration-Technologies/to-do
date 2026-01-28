@@ -10,6 +10,7 @@ export interface Node {
   tags?: string[];
   notes?: string;
   isStarred?: boolean;
+  attachmentCount?: number;
 }
 
 export interface ActionHistory {

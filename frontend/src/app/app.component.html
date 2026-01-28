@@ -111,7 +111,7 @@
       
       <!-- Tree Container -->
       <div *ngIf="!isEmpty || searchQuery" class="tree-container">
-        <app-node-tree [parentId]="null" [depth]="0" />
+        <app-node-tree [parentId]="null" [depth]="0" (openAttachments)="openAttachments($event)" />
       </div>
     </div>
   </main>
@@ -122,6 +122,14 @@
     [node]="notesNode"
     (saveNotes)="onNotesSave($event)"
     (closePanel)="onNotesClose()"
+  />
+
+  <!-- Attachments Panel -->
+  <app-node-attachments 
+    *ngIf="showAttachments" 
+    [node]="attachmentsNode"
+    (closePanel)="onAttachmentsClose()"
+    (attachmentCountChanged)="onAttachmentCountChanged(attachmentsNode?.id!, $event)"
   />
 
   <!-- Keyboard Shortcuts Help -->
