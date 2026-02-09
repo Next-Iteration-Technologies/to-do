@@ -212,15 +212,16 @@ export class AppComponent implements OnInit {
     }
   }
 
-  onSearch(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    this.searchQuery = target.value;
-    this.searchService.search(this.searchQuery, this.stateService.getAllNodes());
+  onSearchClick(): void {
+    if (this.searchQuery.trim()) {
+      this.stateService.setHighlightQuery(this.searchQuery.trim());
+    }
   }
 
   clearSearch(): void {
     this.searchQuery = '';
     this.showSearch = false;
+    this.stateService.clearHighlightQuery();
     this.searchService.clearSearch();
   }
 

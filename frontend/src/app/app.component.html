@@ -77,11 +77,12 @@
       <input 
         type="text" 
         class="search-input" 
-        placeholder="Search your lists..."
+        placeholder="Search and highlight..."
         [(ngModel)]="searchQuery"
-        (input)="onSearch($event)"
+        (keydown.enter)="onSearchClick()"
         #searchInput
       />
+      <button class="btn btn-search" (click)="onSearchClick()" [disabled]="!searchQuery.trim()">Search</button>
       <button class="search-clear" (click)="clearSearch()" *ngIf="searchQuery">×</button>
     </div>
   </header>
