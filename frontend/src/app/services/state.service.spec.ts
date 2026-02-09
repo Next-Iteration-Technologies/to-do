@@ -103,4 +103,43 @@ describe('StateService', () => {
     
     expect(service.getFocusedNodeId()).toBe(testNode.id);
   });
+
+  it('should set and retrieve highlight query', () => {
+    // Arrange
+    const query = 'test query';
+
+    // Act
+    service.setHighlightQuery(query);
+    const result = service.getHighlightQuery();
+
+    // Assert
+    expect(result).toBe(query);
+  });
+
+  it('should emit highlight query through observable', (done) => {
+    // Arrange
+    const query = 'milk';
+
+    // Act & Assert
+    service.highlightQuery$.subscribe(value => {
+      if (value === query) {
+        expect(value).toBe(query);
+        done();
+      }
+    });
+
+    service.setHighlightQuery(query);
+  });
+
+  it('should clear highlight query', () => {
+    // Arrange
+    service.setHighlightQuery('test');
+
+    // Act
+    service.clearHighlightQuery();
+    const result = service.getHighlightQuery();
+
+    // Assert
+    expect(result).toBe('');
+  });
 });
