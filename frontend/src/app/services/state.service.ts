@@ -11,13 +11,11 @@ export class StateService {
   private focusedNodeIdSubject = new BehaviorSubject<number | null>(null);
   private undoStackSubject = new BehaviorSubject<ActionHistory[]>([]);
   private redoStackSubject = new BehaviorSubject<ActionHistory[]>([]);
-  private highlightQuerySubject = new BehaviorSubject<string>('');
 
   nodes$ = this.nodesSubject.asObservable();
   focusedNodeId$ = this.focusedNodeIdSubject.asObservable();
   undoStack$ = this.undoStackSubject.asObservable();
   redoStack$ = this.redoStackSubject.asObservable();
-  highlightQuery$ = this.highlightQuerySubject.asObservable();
 
   private nodes: Node[] = [];
   private nodeMap = new Map<number, Node>();
@@ -104,18 +102,6 @@ export class StateService {
 
   canRedo(): boolean {
     return this.redoStack.length > 0;
-  }
-
-  setHighlightQuery(query: string): void {
-    this.highlightQuerySubject.next(query);
-  }
-
-  getHighlightQuery(): string {
-    return this.highlightQuerySubject.value;
-  }
-
-  clearHighlightQuery(): void {
-    this.highlightQuerySubject.next('');
   }
 
   private buildNodeMap(nodes: Node[]): void {
